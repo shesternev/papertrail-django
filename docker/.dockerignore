@@ -1,0 +1,20 @@
+# Exclude files and directories used for local development
+**/__pycache__
+**/node_modules
+.vscode
+
+# Exclude files and directories used for testing
+.coverage
+htmlcov
+
+# Exclude files and directories used for version control
+.git
+.gitignore
+
+# Exclude the Dockerfile and docker-compose files
+Dockerfile
+docker-compose.yml
+
+# Exclude files and directories used for other purposes
+README.md
+LICENSE

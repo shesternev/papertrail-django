@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+
+  database:
+    image: postgres:15.1-alpine
+    env_file:
+      - ./environment/.env
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    env_file:
+      - ./environment/.env
+    volumes:
+      - ./papertrail:/backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+
+  pgadmin:
+    image: dpage/pgadmin4
+    env_file:
+      - ./environment/.env
+    ports:
+      - "8080:80"
+    depends_on:
+      - database
