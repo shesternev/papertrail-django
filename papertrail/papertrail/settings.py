@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'djoser',
     'silk',
+    'corsheaders'
 
     'account',
 ]
@@ -28,6 +29,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -130,3 +132,6 @@ EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+
+CORS_ALLOWED_ORIGINS = os.environ['CORS_ALLOWED_ORIGINS']
+CSRF_TRUSTED_ORIGINS = os.environ['CSRF_TRUSTED_ORIGINS']
