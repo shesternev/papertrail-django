@@ -2,3 +2,4 @@ Django==3.2.18
 psycopg2==2.9.5
 djangorestframework==3.14.0
 djoser==2.1.0
+django-silk==5.0.3
