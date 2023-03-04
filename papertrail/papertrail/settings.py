@@ -21,9 +21,10 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'djoser',
     'silk',
-    'corsheaders'
+    'corsheaders',
 
     'account',
+    'books',
 ]
 
 MIDDLEWARE = [
@@ -133,5 +134,5 @@ EMAIL_USE_SSL = True
 EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 
-CORS_ALLOWED_ORIGINS = os.environ['CORS_ALLOWED_ORIGINS']
-CSRF_TRUSTED_ORIGINS = os.environ['CSRF_TRUSTED_ORIGINS']
+CORS_ALLOWED_ORIGINS = [os.environ['CORS_ALLOWED_ORIGINS']]
+CSRF_TRUSTED_ORIGINS = [os.environ['CSRF_TRUSTED_ORIGINS']]

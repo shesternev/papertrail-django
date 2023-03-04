@@ -10,6 +10,7 @@ from .models import (
     Language,
     Binding,
     Illustrations,
+    Paper,
     Font,
     Review
 )
@@ -17,6 +18,7 @@ from .models import (
 admin.site.register(Language)
 admin.site.register(Binding)
 admin.site.register(Illustrations)
+admin.site.register(Paper)
 admin.site.register(Font)
 admin.site.register(Review)
 
