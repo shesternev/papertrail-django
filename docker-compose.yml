@@ -29,3 +29,44 @@ services:
       - "8080:80"
     depends_on:
       - database
+
+  redis:
+    image: redis:7.0.5-alpine
+
+  celery:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: celery -A celery_configuration worker -l info
+    env_file:
+      - ./environment/.env
+    volumes:
+      - ./papertrail:/backend
+    depends_on:
+      - redis
+
+  celery-beat:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: celery -A celery_configuration beat -l info
+    env_file:
+      - ./environment/.env
+    volumes:
+      - ./papertrail:/backend
+    depends_on:
+      - redis
+
+  flower:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: celery -A celery_configuration flower -l info
+    env_file:
+      - ./environment/.env
+    volumes:
+      - ./papertrail:/backend
+    ports:
+      - "5555:5555"
+    depends_on:
+      - redis

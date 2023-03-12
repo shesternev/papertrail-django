@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django_celery_results',
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
@@ -25,6 +26,7 @@ INSTALLED_APPS = [
 
     'account',
     'books',
+    'mailing',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +138,7 @@ EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 
 CORS_ALLOWED_ORIGINS = [os.environ['CORS_ALLOWED_ORIGINS']]
 CSRF_TRUSTED_ORIGINS = [os.environ['CSRF_TRUSTED_ORIGINS']]
+
+CELERY_BROKER_URL = os.environ['CELERY_BROKER_URL']
+CELERY_RESULT_BACKEND = os.environ['CELERY_RESULT_BACKEND']
+CELERY_CACHE_BACKEND = os.environ['CELERY_CACHE_BACKEND']
