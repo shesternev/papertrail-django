@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 
 from cart.models import Cart, CartItem
 from books.models import Book, Author
@@ -28,10 +29,11 @@ class ProductSerializer(ModelSerializer):
 
 class CartSerializer(ModelSerializer):
     products = ProductSerializer(many=True)
+    total_price = serializers.FloatField()
 
     class Meta:
         model = Cart
-        fields = ('id', 'products')
+        fields = ('id', 'total_price', 'products')
 
 
 class CartItemSerializer(ModelSerializer):

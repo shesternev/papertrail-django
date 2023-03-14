@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 
-from django.db.models import Prefetch
+from django.db.models import Prefetch, Sum, ExpressionWrapper, F, FloatField
 
 from books.models import Book, Author
 from cart.models import Cart, CartItem
@@ -14,6 +14,8 @@ class CartViewSet(ModelViewSet):
                 Prefetch('author', queryset=Author.objects.all().only('title'))
             ).only('id', 'title', 'author', 'cover_image', 'price'))
         ))
+    ).annotate(total_price=ExpressionWrapper(
+        Sum(F('products__book__price') * F('products__quantity')), output_field=FloatField())
     )
     serializer_class = CartSerializer
 
