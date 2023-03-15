@@ -1,5 +1,9 @@
-from django.db.models import Prefetch, Avg
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
+from rest_framework.permissions import IsAuthenticated
+from django_filters import rest_framework as filters
+
+from django.db.models import Prefetch, Avg
 
 from .serializers import (
     CategoryListSerializer,
@@ -22,6 +26,7 @@ from books.models import (
     Interpreter,
     Illustrator,
 )
+from books.filters import BookListFilter
 
 
 class CategoryListAPIView(ListAPIView):
@@ -48,6 +53,17 @@ class BookListAPIView(ListAPIView):
         Prefetch('author', queryset=Author.objects.all().only('id', 'title')),
     ).only('id', 'title', 'price', 'slug', 'cover_image')
     serializer_class = BookListSerializer
+    filter_backends = (filters.DjangoFilterBackend, SearchFilter, OrderingFilter)
+    filterset_class = BookListFilter
+    search_fields = (
+        'title',
+        'author__title',
+        'book_series__title',
+        'publisher__title',
+        'interpreter__title',
+        'illustrator__title'
+    )
+    ordering_fields = ('price',)
 
 
 class BookDetailRetrieveAPIView(RetrieveAPIView):
@@ -112,4 +128,4 @@ class IllustratorDetailRetrieveAPIView(RetrieveAPIView):
 
 class ReviewCreateAPIView(CreateAPIView):
     serializer_class = ReviewCreateSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
