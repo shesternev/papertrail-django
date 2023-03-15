@@ -14,6 +14,10 @@ app.conf.beat_schedule = {
         'task': 'mailing.tasks.mailing_to_active_users',
         'schedule': crontab(minute=0, hour=0, day_of_week=0),
     },
+    'delete-old-carts-every-day': {
+        'task': 'cart.tasks.delete_old_carts',
+        'schedule': crontab(hour=0, minute=0),
+    },
 }
 
 

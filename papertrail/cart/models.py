@@ -11,6 +11,11 @@ class Cart(models.Model):
         default=uuid.uuid4,
         editable=False
     )
+    created_at = models.DateField(
+        auto_now_add=True,
+        auto_created=True,
+        editable=False
+    )
 
 
 class CartItem(models.Model):
