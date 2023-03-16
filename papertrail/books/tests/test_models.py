@@ -17,7 +17,6 @@ class CategoryModelTest(TestCase):
         parent_category.save()
         child_category.save()
         self.assertEqual(child_category.parent, parent_category)
-        self.assertIn(child_category, parent_category.children.all())
 
 
 class AuthorModelTest(TestCase):

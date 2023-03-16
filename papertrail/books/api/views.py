@@ -58,7 +58,7 @@ class BookListAPIView(ListAPIView):
     search_fields = (
         'title',
         'author__title',
-        'book_series__title',
+        'series__title',
         'publisher__title',
         'interpreter__title',
         'illustrator__title'
